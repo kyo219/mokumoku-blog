@@ -1,0 +1,5 @@
+# 手元で下書き（draft: true）も表示して確認するための設定
+#   uv run quarto preview --profile draft
+# 公開用のビルド（GitHub Actions）では使われないので、下書きは公開されない
+website:
+  draft-mode: visible

@@ -517,13 +517,28 @@ $$
 \underbrace{X(\omega)\in\{x\mid g(x)\leq y\}}_{\text{元の値がこの集合に入る}}
 $$
 
-$g(X)$を$g(x)$に書き換えたのではなく、「条件を満たす数値の集合」を別に作り、$X$の値がそこに入るかを問うているのである。どちらの書き方も、同じ事象
+$g(X)$を$g(x)$に書き換えたのではなく、「条件を満たす数値の集合」を別に作り、$X$の値がそこに入るかを問うているのである。
+
+ただし、$X(\omega)\in\cdots$は1つの$\omega$について成り立つかどうかの**条件**であり、確率$P$に渡すのは、その条件を満たす$\omega$を集めた**事象**である。
+
+2段階の変換$\omega\xrightarrow{\ X\ }X(\omega)\xrightarrow{\ g\ }g(X(\omega))=Y(\omega)$を$\omega$まで遡り、省略せずに書くと次のようになる。
 
 $$
-\{\omega\in\Omega\mid g(X(\omega))\leq y\}
+\begin{aligned}
+F_Y(y)
+&=P(Y\leq y)\\
+&=P\bigl(\{\omega\in\Omega\mid Y(\omega)\leq y\}\bigr)
+&&\text{省略を戻す}\\
+&=P\bigl(\{\omega\in\Omega\mid g(X(\omega))\leq y\}\bigr)
+&&Y(\omega)=g(X(\omega))\\
+&=P\bigl(\{\omega\in\Omega\mid X(\omega)\in\{x\in\mathbb{R}\mid g(x)\leq y\}\}\bigr)
+&&\text{条件を数値の集合で言い換える}\\
+&=P\bigl(X\in\{x\mid g(x)\leq y\}\bigr)
+&&\text{再び省略する}
+\end{aligned}
 $$
 
-の確率を表している。
+外側の$\{\omega\in\Omega\mid\cdots\}$は結果の集合（事象）、内側の$\{x\in\mathbb{R}\mid g(x)\leq y\}$は数値の集合である。内側の$x$は$X(\omega)$を省略したものではなく、1章で見た「条件を書くための仮の文字」なので、ここに$\omega$は入らない（$\{u\in\mathbb{R}\mid g(u)\leq y\}$と書いても同じ集合である）。$\omega$によって変わるのは、「$X(\omega)$がその集合に入るかどうか」の部分だけである。
 
 | 書く場所 | 文字 | 表すもの |
 |------------------------|------------------------|------------------------|
@@ -582,7 +597,20 @@ $$
 P(Y\leq1)=P(X^2\leq1)=P(X\in[-1,1])=P(X\leq1)=\frac34
 $$
 
-となる（$X$は負の値をとらないため、$X\in[-1,1]$は$X\leq1$と同じ）。表を見て$Y\leq1$となる結果を直接数えても、$\{\text{表裏},\text{裏表},\text{裏裏}\}$の3つであり、確率は一致する。
+となる（$X$は負の値をとらないため、$X\in[-1,1]$は$X\leq1$と同じ）。
+
+$\omega$まで遡って書くと、
+
+$$
+\begin{aligned}
+\{\omega\in\Omega\mid Y(\omega)\leq1\}
+&=\{\omega\in\Omega\mid X(\omega)^2\leq1\}\\
+&=\{\omega\in\Omega\mid X(\omega)\in[-1,1]\}\\
+&=\{\text{表裏},\text{裏表},\text{裏裏}\}
+\end{aligned}
+$$
+
+であり、表で$Y\leq1$となる結果を直接数えた結果と一致する。
 
 **例2：$Y=2X+1$（コイン2回）**
 

@@ -55,7 +55,7 @@ cp -r posts/_template-julia posts/my-julia-post  # Julia で書く記事
 - `#| code-fold: true` … コードを折りたたむ
 
 Julia 記事は先頭の YAML に `engine: julia` を書きます（テンプレートに記載済み）。
-[Latexify.jl](https://github.com/korsbo/Latexify.jl) の `latexify` / `@latexify` / `@latexdefine` の結果をセルの最後に置くと、数式として描画されます（例: `posts/julia-latexify/index.qmd`）。
+[Latexify.jl](https://github.com/korsbo/Latexify.jl) の `latexify` / `@latexify` / `@latexdefine` の結果をセルの最後に置くと、数式として描画されます（例: `posts/_template-julia/index.qmd`）。
 
 ## 記事の修正
 
@@ -70,10 +70,11 @@ Julia 記事は先頭の YAML に `engine: julia` を書きます（テンプレ
 ## 手元での確認
 
 ```sh
-uv run quarto preview
+uv run quarto preview --profile draft
 ```
 
-ブラウザが開き、ファイルを保存するたびに自動で更新されます（終了は Ctrl+C）。下書きもここでは表示されます。
+ブラウザが開き、ファイルを保存するたびに自動で更新されます（終了は Ctrl+C）。
+`--profile draft` を付けると `_quarto-draft.yml` の設定が加わり、下書き（`draft: true`）の記事も表示されます。付けない場合、下書きは公開時と同じく空のページになります。
 
 公開時と同じ成果物を作る場合:
 
