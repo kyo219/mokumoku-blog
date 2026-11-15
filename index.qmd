@@ -5,7 +5,7 @@ listing:
   sort: "date desc"
   type: default
   categories: true
-  date-format: "YYYY-MM-DD"
+  date-format: "YYYY年M月D日"
   fields: [date, title, description, categories]
   sort-ui: false
   filter-ui: false

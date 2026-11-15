@@ -10,12 +10,29 @@ website:
   site-url: "https://kyo219.github.io/mokumoku-blog/"
   # 下書き（draft: true）の扱い。gone = ビルド結果から除外し、一覧・検索・サイトマップにも出さない
   draft-mode: gone
+  # ヘッダーに検索欄を置く
+  search:
+    location: navbar
+    type: textbox
   navbar:
     left:
       - href: index.qmd
         text: 記事一覧
       - href: about.qmd
         text: About
+    right:
+      - icon: github
+        href: https://github.com/kyo219/mokumoku-blog
+        aria-label: GitHub リポジトリ
+  page-footer:
+    left: "© 2026 mokumoku blog"
+    right: "Built with [Quarto](https://quarto.org/)"
+
+# 画面に出るラベルの日本語を調整
+language:
+  title-block-published: "投稿日"
+  search-text-placeholder: "記事を検索"
+  listing-page-field-categories: "タグ"
 
 format:
   html:
@@ -26,6 +43,7 @@ format:
     toc-depth: 3
     toc-title: 目次
     code-copy: true
+    highlight-style: monokai
     code-overflow: wrap
     code-fold: false
     code-summary: "コードを表示"

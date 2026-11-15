@@ -1,13 +1,28 @@
 /*-- scss:defaults --*/
 
-// 白背景・落ち着いた配色
-$body-bg: #ffffff;
-$body-color: #2b2b2b;
-$primary: #2f5d7c;
-$link-color: $primary;
+// Qiita 風：薄いグレーの背景に白いカード、緑の差し色
+$accent: #55c500;
+$page-bg: #f5f6f6;
+$card-bg: #ffffff;
+$border-color: #e1e4e5;
+$muted: #6b7880;
+$text: #333333;
+
+$body-bg: $page-bg;
+$body-color: $text;
+$primary: $accent;
+$link-color: #0f83fd;
+$link-decoration: none;
+$link-hover-decoration: underline;
 $navbar-bg: #ffffff;
-$navbar-fg: #2b2b2b;
+$navbar-fg: $muted;
+$navbar-hl: $text;
 $footer-bg: #ffffff;
+$footer-fg: $muted;
+
+// 段組み：本文の列を広めにし、右の目次の列は少し細くする
+$grid-body-width: 920px;
+$grid-margin-width: 230px;
 
 // 日本語の本文フォント（端末にあるものを使う）
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
@@ -15,40 +30,305 @@ $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
   sans-serif;
 $font-family-monospace: SFMono-Regular, Menlo, Consolas, "Liberation Mono",
   monospace;
-$font-size-root: 17px;
-$line-height-base: 1.85;
-$headings-font-weight: 600;
+$font-size-root: 16px;
+$line-height-base: 1.9;
+$headings-font-weight: 700;
 
-$code-color: #8a3b3b;
-$code-block-bg: #f7f7f5;
+// インラインコード
+$code-color: $text;
+
+// コードブロック（暗い背景）
+$code-block-bg: #364549;
+$code-block-color: #e3e3e3;
+$code-block-border-left: none;
 
 /*-- scss:rules --*/
 
 body {
-  font-feature-settings: "palt" 0;
   word-break: normal;
   overflow-wrap: anywhere;
-  letter-spacing: 0.02em;
 }
 
-.navbar {
-  border-bottom: 1px solid #ececec;
+// =====================================================================
+// ヘッダー
+// =====================================================================
+#quarto-header .navbar {
+  background: #ffffff;
+  border-bottom: 1px solid $border-color;
+  box-shadow: none;
+  min-height: 56px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
+.navbar-brand .navbar-title {
+  color: $accent;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+#quarto-header .navbar .nav-link {
+  color: $muted;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 1rem 0.75rem;
+  border-bottom: 3px solid transparent;
+
+  &:hover {
+    color: $text;
+  }
+
+  &.active {
+    color: $text;
+    border-bottom-color: $accent;
+  }
+}
+
+// ヘッダーの中身を中央寄せの幅に収める
+#quarto-header .navbar-container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+// 右側のアイコン（GitHub）
+#quarto-header .navbar .nav-link .bi {
+  font-size: 1.25rem;
+}
+
+// 検索欄
+#quarto-search.type-textbox {
+  margin-left: 0.5rem;
+}
+
+#quarto-search .aa-Form {
+  background: $page-bg;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  height: 36px;
+  min-width: 240px;
+
+  &:focus-within {
+    background: #ffffff;
+    border-color: $accent;
+    box-shadow: 0 0 0 2px rgba(85, 197, 0, 0.15);
+  }
+}
+
+#quarto-search .aa-Input {
+  font-size: 0.875rem;
+  color: $text;
+}
+
+// スマホではナビの下線を外し、メニューを縦に並べる
+@media (max-width: 991.98px) {
+  #quarto-header .navbar .nav-link {
+    padding: 0.5rem 0.25rem;
+    border-bottom: none;
+
+    &.active {
+      color: $accent;
+    }
+  }
+
+  #quarto-search .aa-Form {
+    min-width: 0;
+  }
+}
+
+// =====================================================================
+// 記事本体（白いカード）
+// =====================================================================
+#quarto-content {
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+main.content {
+  background: $card-bg;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 1.75rem 2rem 2.25rem;
+}
+
+@media (max-width: 767.98px) {
+  #quarto-content {
+    padding-top: 0.75rem;
+  }
+
+  main.content {
+    padding: 1.25rem 1rem 1.75rem;
+    border-radius: 6px;
+  }
+}
+
+// 記事の見出し部分：投稿日 → タイトル → タグ の順に並べる
+#title-block-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.75rem;
+
+  .quarto-title-meta {
+    order: -1;
+    display: flex;
+    gap: 1rem;
+    margin: 0 0 0.6rem;
+
+    > div {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+  }
+
+  .quarto-title-meta-heading,
+  .quarto-title-meta-contents p {
+    margin: 0;
+    color: $muted;
+    font-size: 0.85rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  // 説明文は記事一覧でだけ使う
+  .description {
+    display: none;
+  }
+}
+
+// タグ（カテゴリ）
+.quarto-category,
+.listing-categories .listing-category {
+  display: inline-flex;
+  align-items: center;
+  background: #edf0f2;
+  border: none;
+  border-radius: 4px;
+  color: $text;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  padding: 0.1rem 0.6rem;
+  margin: 0 0.35rem 0.35rem 0;
+  opacity: 1;
+  text-transform: none;
+  cursor: pointer;
+
+  &::before {
+    content: "\f5af";
+    font-family: "bootstrap-icons";
+    color: #9aa5ab;
+    font-size: 0.85em;
+    margin-right: 0.35em;
+  }
+
+  &:hover {
+    background: #e2e7ea;
+  }
+}
+
+// Quarto の記事タイトル下のタグは枠線付きなので、塗りのチップに揃える
+.quarto-title .quarto-categories .quarto-category {
+  border: none;
+}
+
+// =====================================================================
+// 本文
+// =====================================================================
 main h2 {
-  margin-top: 2.5rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px solid #ececec;
+  font-size: 1.6rem;
+  margin-top: 3rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid $border-color;
 }
 
 main h3 {
+  font-size: 1.25rem;
   margin-top: 2rem;
 }
 
-// 段落の余白をやや広めに
 main p,
 main li {
   margin-bottom: 0.9em;
+}
+
+// インラインコード
+:not(pre) > code {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+  font-size: 0.875em;
+}
+
+// コードブロック
+div.sourceCode,
+pre.sourceCode {
+  border-radius: 6px;
+}
+
+div.sourceCode pre,
+div.sourceCode code {
+  color: $code-block-color;
+}
+
+.code-copy-button i {
+  color: #c5ccd0;
+}
+
+// 表
+main table:not(.cell-output-display table) {
+  border: 1px solid $border-color;
+
+  th {
+    background: #f2f4f5;
+  }
+
+  th,
+  td {
+    border: 1px solid $border-color;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+// 引用
+blockquote {
+  border-left: 4px solid #dddddd;
+  color: #777;
+  padding-left: 1rem;
+}
+
+// 補足・定義の囲み（Qiita のノート風に背景色をつける）
+.callout.callout-style-simple {
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+}
+
+.callout-note.callout-style-simple {
+  background: #e8f4fb;
+  border-left-color: #3a9fd6;
+}
+
+.callout-tip.callout-style-simple {
+  background: #eef8e6;
+  border-left-color: $accent;
+}
+
+.callout-warning.callout-style-simple {
+  background: #fdf5e1;
+  border-left-color: #e6a700;
+}
+
+// 囲みの中の表は白い背景にして、囲みの色と区別する
+.callout table {
+  --bs-table-bg: #ffffff;
+  background: #ffffff;
 }
 
 // 横に長い表・数式はその要素だけを横スクロールさせ、ページ全体は崩さない
@@ -74,19 +354,47 @@ img {
   height: auto;
 }
 
-// 記事一覧
-.quarto-listing-default .listing-title {
-  font-size: 1.25rem;
+// =====================================================================
+// 目次
+// =====================================================================
+
+// 右側の目次（カード）
+#quarto-margin-sidebar nav#TOC {
+  background: $card-bg;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+
+  h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $text;
+    margin-bottom: 0.5rem;
+  }
+
+  ul {
+    border-left: none;
+  }
+
+  a.nav-link {
+    color: $muted;
+    border-left: 2px solid transparent;
+    padding-left: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  a.nav-link.active {
+    color: $text !important;
+    font-weight: 600;
+    border-left-color: $accent;
+  }
 }
 
-.quarto-listing-default .listing-date {
-  color: #777;
-}
-
-// 記事冒頭の目次（Notion の目次ブロック風）
+// 記事冒頭の目次
 #TOC-body {
   margin: 1.5rem 0 2.5rem;
-  background: #f7f7f5;
+  background: #f7f8f8;
+  border: 1px solid $border-color;
   border-radius: 6px;
   padding: 0.9rem 1.2rem 0.6rem;
   font-size: 0.92rem;
@@ -96,9 +404,9 @@ img {
     margin: 0 0 0.4rem;
     padding: 0;
     border: none;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #888;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $text;
   }
 
   ul {
@@ -117,13 +425,10 @@ img {
 
   a {
     color: #555;
-    text-decoration: none;
-    border-bottom: 1px solid #ddd;
   }
 
   a:hover {
-    color: $primary;
-    border-bottom-color: $primary;
+    color: $link-color;
   }
 }
 
@@ -131,5 +436,141 @@ img {
 @media (max-width: 767.98px) {
   #TOC-body {
     display: block;
+  }
+}
+
+// =====================================================================
+// トップページの記事一覧
+// =====================================================================
+
+// 一覧ページは記事カードが並ぶので、外側の白いカードは外す
+#quarto-document-content:has(.quarto-listing) {
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  #title-block-header .title {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+// 1記事 = 1枚のカード（投稿日 → タイトル → タグ → 説明）
+.quarto-listing-default .quarto-post {
+  display: flex;
+  flex-direction: column;
+  background: $card-bg;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 1rem 1.4rem 0.9rem;
+  margin-bottom: 0.75rem;
+  gap: 0;
+  transition: box-shadow 0.15s;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .metadata {
+    order: -1;
+    flex: none;
+    width: auto;
+    padding: 0;
+    margin-bottom: 0.25rem;
+    text-align: left;
+  }
+
+  .body {
+    padding: 0;
+  }
+}
+
+.quarto-listing-default .listing-date {
+  color: $muted;
+  font-size: 0.8rem;
+}
+
+.quarto-listing-default .listing-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0 0 0.5rem;
+
+  a {
+    color: $text;
+    font-weight: 700;
+  }
+
+  a:hover {
+    color: $text;
+    text-decoration: underline;
+  }
+}
+
+.quarto-listing-default .listing-description {
+  margin-top: 0.25rem;
+
+  a,
+  p {
+    color: $muted;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+}
+
+// 右側のタグ一覧（カード）
+#quarto-margin-sidebar:has(.quarto-listing-category) {
+  background: $card-bg;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  height: fit-content;
+}
+
+.quarto-listing-category-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: $text;
+  margin-bottom: 0.5rem;
+}
+
+.quarto-listing-category .category {
+  font-size: 0.85rem;
+  color: $muted;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background: $page-bg;
+    color: $text;
+  }
+
+  &.active {
+    color: $text;
+    font-weight: 700;
+    background: #eef8e6;
+  }
+}
+
+// =====================================================================
+// フッター
+// =====================================================================
+footer.footer {
+  background: #ffffff;
+  border-top: 1px solid $border-color;
+}
+
+// フッターの中身もヘッダーと同じ幅に収める
+.nav-footer {
+  max-width: 1240px;
+  margin: 0 auto;
+  border-top: none;
+  font-size: 0.85rem;
+  min-height: 72px;
+
+  a {
+    color: $muted;
+    text-decoration: underline;
   }
 }
