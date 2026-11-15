@@ -1,0 +1,84 @@
+/*-- scss:defaults --*/
+
+// 白背景・落ち着いた配色
+$body-bg: #ffffff;
+$body-color: #2b2b2b;
+$primary: #2f5d7c;
+$link-color: $primary;
+$navbar-bg: #ffffff;
+$navbar-fg: #2b2b2b;
+$footer-bg: #ffffff;
+
+// 日本語の本文フォント（端末にあるものを使う）
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+  "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", Meiryo,
+  sans-serif;
+$font-family-monospace: SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+  monospace;
+$font-size-root: 17px;
+$line-height-base: 1.85;
+$headings-font-weight: 600;
+
+$code-color: #8a3b3b;
+$code-block-bg: #f7f7f5;
+
+/*-- scss:rules --*/
+
+body {
+  font-feature-settings: "palt" 0;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  letter-spacing: 0.02em;
+}
+
+.navbar {
+  border-bottom: 1px solid #ececec;
+}
+
+main h2 {
+  margin-top: 2.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #ececec;
+}
+
+main h3 {
+  margin-top: 2rem;
+}
+
+// 段落の余白をやや広めに
+main p,
+main li {
+  margin-bottom: 0.9em;
+}
+
+// 横に長い表・数式はその要素だけを横スクロールさせ、ページ全体は崩さない
+.cell-output-display,
+.cell-output-display table {
+  overflow-x: auto;
+}
+
+mjx-container[display="true"] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+.cell-output-display table {
+  display: block;
+  max-width: 100%;
+  font-size: 0.9em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// 記事一覧
+.quarto-listing-default .listing-title {
+  font-size: 1.25rem;
+}
+
+.quarto-listing-default .listing-date {
+  color: #777;
+}

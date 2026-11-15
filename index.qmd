@@ -1,0 +1,15 @@
+---
+title: "記事一覧"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  date-format: "YYYY-MM-DD"
+  fields: [date, title, description, categories]
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: false
+toc: false
+---

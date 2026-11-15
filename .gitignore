@@ -1,0 +1,15 @@
+# Quarto
+/.quarto/
+/_site/
+# プレビュー中断時などに残る中間ファイル
+/site_libs/
+/*-listing.json
+**/*.quarto_ipynb
+
+# Python
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

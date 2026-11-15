@@ -1,0 +1,45 @@
+---
+# Julia で書く記事のテンプレート
+#   cp -r posts/_template-julia posts/my-julia-post
+# 公開するときは draft: true の行を削除する
+title: "記事タイトル"
+description: "記事一覧に表示される一文の説明。"
+date: 2026-01-01
+categories: [Julia]
+engine: julia
+draft: true
+---
+
+## 今日やったこと
+
+ここに本文を書く。
+
+```{julia}
+using Latexify
+```
+
+Julia の式を数式として表示する（セルの結果が `LaTeXString` なら数式として描画される）。
+
+```{julia}
+@latexify y = a * x^2 + b * x + c env = :equation
+```
+
+式を実行して、値も一緒に表示する。
+
+```{julia}
+@latexdefine z = 1 // 2 + 1 // 3 env = :equation
+```
+
+<!--
+Julia パッケージを追加するときはリポジトリ直下で:
+  julia --project=. -e 'using Pkg; Pkg.add("パッケージ名")'
+Project.toml と Manifest.toml の両方をコミットする。
+-->
+
+## わかったこと
+
+-
+
+## 次にやること
+
+-

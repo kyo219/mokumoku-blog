@@ -1,0 +1,4 @@
+{
+  // このリポジトリでは uv が作る .venv の Python を使う（Quarto 拡張もこれを使ってコードを実行する）
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+}

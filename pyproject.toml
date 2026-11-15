@@ -1,0 +1,16 @@
+[project]
+name = "mokumoku-blog"
+version = "0.1.0"
+description = "Quarto で書く勉強記録ブログ"
+requires-python = ">=3.14"
+dependencies = [
+    "ipykernel>=7.4.0",
+    "matplotlib>=3.11.2",
+    "nbclient>=0.11.0",
+    "nbformat>=5.11.1",
+    "pandas>=3.1.1",
+    "pyyaml>=6.0.3",
+]
+
+[tool.uv]
+package = false

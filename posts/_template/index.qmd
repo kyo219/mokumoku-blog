@@ -1,0 +1,52 @@
+---
+# 使い方: このフォルダを posts/<slug>/ にコピーして書き始める
+#   cp -r posts/_template posts/my-new-post
+# 公開するときは draft: true の行を削除する（または false にする）
+title: "記事タイトル"
+description: "記事一覧に表示される一文の説明。"
+date: 2026-01-01
+categories: [カテゴリ1, カテゴリ2]
+draft: true
+---
+
+## 今日やったこと
+
+ここに本文を書く。インライン数式は $E = mc^2$、別行立ての数式は次のように書く。
+
+$$
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+$$
+
+## コードと結果
+
+```{python}
+import pandas as pd
+
+pd.DataFrame({"x": [1, 2, 3], "y": [2, 4, 6]})
+```
+
+<!--
+コードと出力の表示は、セル先頭の `#|` オプションで切り替える。
+  #| echo: false       コードを隠して結果だけ表示
+  #| output: false     結果を隠してコードだけ表示
+  #| include: false    コードも結果も表示しない（実行はする）
+  #| eval: false       実行せずにコードだけ表示
+  #| code-fold: true   コードを折りたたむ
+記事全体に適用したい場合は、先頭の YAML に次のように書く。
+  execute:
+    echo: false
+-->
+
+## 画像・ファイル
+
+画像やCSVはこの記事のフォルダに置き、相対パスで参照する。
+
+<!-- ![画像の説明](image.png) -->
+
+## わかったこと
+
+-
+
+## 次にやること
+
+-

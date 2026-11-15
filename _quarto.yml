@@ -1,0 +1,35 @@
+project:
+  type: website
+
+lang: ja
+
+website:
+  title: "mokumoku blog"
+  description: "勉強したことを少しずつ記録するブログ"
+  # 公開URL（README の「公開URLとパス」を参照）。sitemap などの絶対URLに使われます。
+  site-url: "https://kyo219.github.io/mokumoku-blog/"
+  # 下書き（draft: true）の扱い。gone = ビルド結果から除外し、一覧・検索・サイトマップにも出さない
+  draft-mode: gone
+  navbar:
+    left:
+      - href: index.qmd
+        text: 記事一覧
+      - href: about.qmd
+        text: About
+
+format:
+  html:
+    theme:
+      light: [cosmo, theme.scss]
+    toc: true
+    toc-title: 目次
+    code-copy: true
+    code-overflow: wrap
+    code-fold: false
+    code-summary: "コードを表示"
+    smooth-scroll: true
+
+# Python コードはビルドのたびに実行する（凍結 freeze は使わない）
+execute:
+  echo: true
+  warning: false
