@@ -22,6 +22,8 @@ format:
     theme:
       light: [cosmo, theme.scss]
     toc: true
+    toc-location: right-body
+    toc-depth: 3
     toc-title: 目次
     code-copy: true
     code-overflow: wrap
